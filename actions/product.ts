@@ -105,10 +105,8 @@ export async function getProductById(id: string): Promise<Product | null> {
 
     return {
       ...mapProductFromDB(data),
-      // @ts-expect-error - supplier is joined
-      supplierName: data.supplier?.business_name,
-      // @ts-expect-error - supplier is joined
-      supplierPhone: data.supplier?.phone,
+      supplierName: (data as { supplier?: { business_name?: string } }).supplier?.business_name,
+      supplierPhone: (data as { supplier?: { phone?: string } }).supplier?.phone,
     }
   } catch (error) {
     console.error('Get product by id error:', error)
