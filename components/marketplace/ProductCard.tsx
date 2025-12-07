@@ -46,20 +46,20 @@ export default function ProductCard({ product }: ProductCardProps) {
           </Badge>
         </div>
       </Link>
-      <CardContent className="p-4">
+      <CardContent className="p-3 sm:p-4">
         <Link href={`/product/${product.id}`}>
-          <h3 className="font-semibold text-gray-900 line-clamp-2 hover:text-emerald-600 transition-colors">
+          <h3 className="font-semibold text-gray-900 line-clamp-2 hover:text-emerald-600 transition-colors text-sm sm:text-base">
             {product.name}
           </h3>
         </Link>
-        <p className="text-sm text-gray-500 mt-1">
+        <p className="text-xs sm:text-sm text-gray-500 mt-1">
           per {product.unit}
         </p>
-        <div className="flex items-center justify-between mt-3">
-          <p className="text-lg font-bold text-emerald-600">
+        <div className="flex items-center justify-between mt-2 sm:mt-3">
+          <p className="text-sm sm:text-lg font-bold text-emerald-600">
             {formatCurrency(product.price)}
           </p>
-          <Button size="sm" variant="outline" className="hover:bg-emerald-50 hover:border-emerald-500">
+          <Button size="sm" variant="outline" className="hover:bg-emerald-50 hover:border-emerald-500 h-8 w-8 p-0 sm:h-9 sm:w-auto sm:px-3">
             <ShoppingCart className="w-4 h-4" />
           </Button>
         </div>

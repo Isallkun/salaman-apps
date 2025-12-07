@@ -171,18 +171,18 @@ export default function ProductDetailPage() {
           </div>
 
           {/* Product Info */}
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             <div>
-              <Badge className="bg-emerald-500 mb-3">{product.category}</Badge>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              <Badge className="bg-emerald-500 mb-2 sm:mb-3">{product.category}</Badge>
+              <h1 className="text-xl sm:text-3xl font-bold text-gray-900 mb-2">
                 {product.name}
               </h1>
-              <p className="text-gray-600">{product.description}</p>
+              <p className="text-sm sm:text-base text-gray-600">{product.description}</p>
             </div>
 
-            <div className="bg-emerald-50 rounded-xl p-6">
-              <p className="text-sm text-gray-600 mb-1">Harga per {product.unit}</p>
-              <p className="text-4xl font-bold text-emerald-600">
+            <div className="bg-emerald-50 rounded-xl p-4 sm:p-6">
+              <p className="text-xs sm:text-sm text-gray-600 mb-1">Harga per {product.unit}</p>
+              <p className="text-2xl sm:text-4xl font-bold text-emerald-600">
                 {formatCurrency(product.price)}
               </p>
             </div>
@@ -207,42 +207,44 @@ export default function ProductDetailPage() {
             )}
 
             {/* Quantity & Add to Cart */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-4">
-                <span className="text-gray-700 font-medium">Jumlah:</span>
+            <div className="space-y-3 sm:space-y-4">
+              <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
+                <span className="text-sm sm:text-base text-gray-700 font-medium">Jumlah:</span>
                 <div className="flex items-center gap-2">
                   <Button
                     variant="outline"
                     size="icon"
+                    className="h-8 w-8 sm:h-10 sm:w-10"
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
                     disabled={quantity <= 1}
                   >
-                    <Minus className="w-4 h-4" />
+                    <Minus className="w-3 h-3 sm:w-4 sm:h-4" />
                   </Button>
-                  <span className="w-12 text-center font-semibold">{quantity}</span>
+                  <span className="w-10 sm:w-12 text-center font-semibold">{quantity}</span>
                   <Button
                     variant="outline"
                     size="icon"
+                    className="h-8 w-8 sm:h-10 sm:w-10"
                     onClick={() => setQuantity(quantity + 1)}
                   >
-                    <Plus className="w-4 h-4" />
+                    <Plus className="w-3 h-3 sm:w-4 sm:h-4" />
                   </Button>
                 </div>
-                <span className="text-gray-500">{product.unit}</span>
+                <span className="text-sm text-gray-500">{product.unit}</span>
               </div>
 
-              <div className="flex items-center justify-between bg-gray-50 rounded-lg p-4">
-                <span className="text-gray-600">Subtotal:</span>
-                <span className="text-2xl font-bold text-gray-900">
+              <div className="flex items-center justify-between bg-gray-50 rounded-lg p-3 sm:p-4">
+                <span className="text-sm sm:text-base text-gray-600">Subtotal:</span>
+                <span className="text-lg sm:text-2xl font-bold text-gray-900">
                   {formatCurrency(product.price * quantity)}
                 </span>
               </div>
 
               <Button
                 onClick={handleAddToCart}
-                className="w-full bg-emerald-500 hover:bg-emerald-600 h-14 text-lg"
+                className="w-full bg-emerald-500 hover:bg-emerald-600 h-12 sm:h-14 text-base sm:text-lg"
               >
-                <ShoppingCart className="w-5 h-5 mr-2" />
+                <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                 Tambah ke Keranjang
               </Button>
             </div>

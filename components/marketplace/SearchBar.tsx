@@ -40,25 +40,26 @@ export default function SearchBar({
     <div className="space-y-4">
       <form onSubmit={handleSearch} className="flex gap-2">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
           <Input
             type="text"
             placeholder="Cari produk..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10"
+            className="pl-9 sm:pl-10 text-sm sm:text-base"
           />
         </div>
-        <Button type="submit" className="bg-emerald-500 hover:bg-emerald-600">
-          Cari
+        <Button type="submit" className="bg-emerald-500 hover:bg-emerald-600 px-3 sm:px-4">
+          <Search className="w-4 h-4 sm:hidden" />
+          <span className="hidden sm:inline">Cari</span>
         </Button>
         <Button
           type="button"
           variant="outline"
           onClick={() => setShowFilters(!showFilters)}
-          className={showFilters ? 'bg-emerald-50 border-emerald-500' : ''}
+          className={`px-3 ${showFilters ? 'bg-emerald-50 border-emerald-500' : ''}`}
         >
-          <SlidersHorizontal className="w-5 h-5" />
+          <SlidersHorizontal className="w-4 h-4 sm:w-5 sm:h-5" />
         </Button>
       </form>
 

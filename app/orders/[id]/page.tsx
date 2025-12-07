@@ -91,18 +91,18 @@ export default function OrderDetailPage() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* Success Message */}
         {paymentStatus === 'success' && (
-          <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-6 mb-6">
-            <div className="flex items-center gap-4">
-              <div className="bg-emerald-500 p-3 rounded-full">
-                <CheckCircle className="w-6 h-6 text-white" />
+          <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 sm:p-6 mb-4 sm:mb-6">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <div className="bg-emerald-500 p-2 sm:p-3 rounded-full flex-shrink-0">
+                <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
               <div>
-                <h3 className="font-semibold text-emerald-800">Pembayaran Berhasil!</h3>
-                <p className="text-sm text-emerald-700">
-                  Dana Anda sudah aman di rekening escrow SALAMAN. Supplier akan segera memproses pesanan.
+                <h3 className="font-semibold text-emerald-800 text-sm sm:text-base">Pembayaran Berhasil!</h3>
+                <p className="text-xs sm:text-sm text-emerald-700">
+                  Dana Anda sudah aman di rekening escrow SALAMAN.
                 </p>
               </div>
             </div>
@@ -110,13 +110,13 @@ export default function OrderDetailPage() {
         )}
 
         {/* Order Header */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 sm:mb-6">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Detail Pesanan</h1>
-            <p className="text-gray-500">#{order.id}</p>
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Detail Pesanan</h1>
+            <p className="text-xs sm:text-sm text-gray-500 truncate max-w-[200px] sm:max-w-none">#{order.id}</p>
           </div>
-          <Badge className={status.color}>
-            <StatusIcon className="w-4 h-4 mr-1" />
+          <Badge className={`${status.color} text-xs sm:text-sm w-fit`}>
+            <StatusIcon className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
             {status.label}
           </Badge>
         </div>
@@ -189,21 +189,21 @@ export default function OrderDetailPage() {
 
           {/* Escrow Status */}
           <Card className="bg-emerald-50 border-emerald-200">
-            <CardContent className="p-6">
-              <div className="flex items-start gap-4">
-                <div className="bg-emerald-500 p-3 rounded-full">
-                  <ShieldCheck className="w-6 h-6 text-white" />
+            <CardContent className="p-4 sm:p-6">
+              <div className="flex items-start gap-3 sm:gap-4">
+                <div className="bg-emerald-500 p-2 sm:p-3 rounded-full flex-shrink-0">
+                  <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-emerald-800 mb-1">
+                  <h3 className="font-semibold text-emerald-800 mb-1 text-sm sm:text-base">
                     Status Escrow
                   </h3>
-                  <p className="text-sm text-emerald-700">
+                  <p className="text-xs sm:text-sm text-emerald-700">
                     {order.status === 'PENDING' && 'Menunggu pembayaran dari pembeli.'}
-                    {order.status === 'PAID' && 'Dana sudah diterima dan ditahan di escrow. Menunggu pengiriman dari supplier.'}
-                    {order.status === 'SHIPPED' && 'Barang sedang dalam pengiriman. Upload foto saat barang sampai untuk verifikasi.'}
-                    {order.status === 'DELIVERED' && 'Barang sudah sampai. Silakan upload foto untuk verifikasi AI.'}
-                    {order.status === 'COMPLETED' && 'Transaksi selesai. Dana sudah dicairkan ke supplier.'}
+                    {order.status === 'PAID' && 'Dana ditahan di escrow. Menunggu pengiriman.'}
+                    {order.status === 'SHIPPED' && 'Barang dalam pengiriman. Upload foto saat sampai.'}
+                    {order.status === 'DELIVERED' && 'Barang sampai. Upload foto untuk verifikasi AI.'}
+                    {order.status === 'COMPLETED' && 'Transaksi selesai. Dana dicairkan ke supplier.'}
                     {order.status === 'CANCELLED' && 'Pesanan dibatalkan.'}
                   </p>
                 </div>

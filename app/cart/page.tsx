@@ -81,8 +81,8 @@ export default function CartPage() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Keranjang Belanja</h1>
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8">Keranjang Belanja</h1>
 
         {items.length === 0 ? (
           <Card className="text-center py-12">
@@ -103,9 +103,9 @@ export default function CartPage() {
             <div className="lg:col-span-2 space-y-4">
               {items.map((item) => (
                 <Card key={item.productId}>
-                  <CardContent className="p-4">
-                    <div className="flex gap-4">
-                      <div className="relative w-24 h-24 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+                  <CardContent className="p-3 sm:p-4">
+                    <div className="flex gap-3 sm:gap-4">
+                      <div className="relative w-16 h-16 sm:w-24 sm:h-24 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
                         {item.imageUrl ? (
                           <Image
                             src={item.imageUrl}
@@ -115,55 +115,57 @@ export default function CartPage() {
                           />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center text-gray-400">
-                            <ShoppingBag className="w-8 h-8" />
+                            <ShoppingBag className="w-6 h-6 sm:w-8 sm:h-8" />
                           </div>
                         )}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-semibold text-gray-900 truncate">
+                        <h3 className="font-semibold text-gray-900 text-sm sm:text-base line-clamp-2">
                           {item.productName}
                         </h3>
-                        <p className="text-sm text-gray-500">
+                        <p className="text-xs sm:text-sm text-gray-500">
                           {formatCurrency(item.unitPrice)} / {item.unit || 'unit'}
                         </p>
-                        <div className="flex items-center gap-3 mt-3">
-                          <Button
-                            variant="outline"
-                            size="icon"
-                            className="h-8 w-8"
-                            onClick={() =>
-                              updateQuantity(item.productId, item.quantity - 1)
-                            }
-                          >
-                            <Minus className="w-4 h-4" />
-                          </Button>
-                          <span className="w-8 text-center font-medium">
-                            {item.quantity}
-                          </span>
-                          <Button
-                            variant="outline"
-                            size="icon"
-                            className="h-8 w-8"
-                            onClick={() =>
-                              updateQuantity(item.productId, item.quantity + 1)
-                            }
-                          >
-                            <Plus className="w-4 h-4" />
-                          </Button>
+                        <div className="flex items-center justify-between mt-2 sm:mt-3">
+                          <div className="flex items-center gap-2">
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              className="h-7 w-7 sm:h-8 sm:w-8"
+                              onClick={() =>
+                                updateQuantity(item.productId, item.quantity - 1)
+                              }
+                            >
+                              <Minus className="w-3 h-3 sm:w-4 sm:h-4" />
+                            </Button>
+                            <span className="w-6 sm:w-8 text-center font-medium text-sm">
+                              {item.quantity}
+                            </span>
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              className="h-7 w-7 sm:h-8 sm:w-8"
+                              onClick={() =>
+                                updateQuantity(item.productId, item.quantity + 1)
+                              }
+                            >
+                              <Plus className="w-3 h-3 sm:w-4 sm:h-4" />
+                            </Button>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <p className="font-bold text-gray-900 text-sm sm:text-base">
+                              {formatCurrency(item.unitPrice * item.quantity)}
+                            </p>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="text-red-500 hover:text-red-600 hover:bg-red-50 h-7 w-7 p-0"
+                              onClick={() => removeItem(item.productId)}
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </Button>
+                          </div>
                         </div>
-                      </div>
-                      <div className="text-right">
-                        <p className="font-bold text-gray-900">
-                          {formatCurrency(item.unitPrice * item.quantity)}
-                        </p>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="text-red-500 hover:text-red-600 hover:bg-red-50 mt-2"
-                          onClick={() => removeItem(item.productId)}
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
                       </div>
                     </div>
                   </CardContent>

@@ -130,16 +130,16 @@ export default function CheckoutPage() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         <button
           onClick={() => router.back()}
-          className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6"
+          className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4 sm:mb-6 text-sm"
         >
           <ArrowLeft className="w-4 h-4" />
           Kembali
         </button>
 
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Checkout</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8">Checkout</h1>
 
         {error && (
           <div className="bg-red-50 text-red-600 p-4 rounded-lg mb-6">
@@ -150,19 +150,18 @@ export default function CheckoutPage() {
         <div className="space-y-6">
           {/* Escrow Info */}
           <Card className="bg-emerald-50 border-emerald-200">
-            <CardContent className="p-6">
-              <div className="flex items-start gap-4">
-                <div className="bg-emerald-500 p-3 rounded-full">
-                  <ShieldCheck className="w-6 h-6 text-white" />
+            <CardContent className="p-4 sm:p-6">
+              <div className="flex items-start gap-3 sm:gap-4">
+                <div className="bg-emerald-500 p-2 sm:p-3 rounded-full flex-shrink-0">
+                  <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-emerald-800 mb-1">
+                  <h3 className="font-semibold text-emerald-800 mb-1 text-sm sm:text-base">
                     Pembayaran Aman dengan Escrow
                   </h3>
-                  <p className="text-sm text-emerald-700">
+                  <p className="text-xs sm:text-sm text-emerald-700">
                     Uang Anda akan ditahan di rekening bersama SALAMAN sampai barang 
-                    diterima dan diverifikasi. Supplier baru menerima pembayaran setelah 
-                    Anda konfirmasi barang sesuai.
+                    diterima dan diverifikasi.
                   </p>
                 </div>
               </div>
@@ -215,17 +214,18 @@ export default function CheckoutPage() {
           <Button
             onClick={handlePayment}
             disabled={isProcessing}
-            className="w-full bg-emerald-500 hover:bg-emerald-600 h-14 text-lg"
+            className="w-full bg-emerald-500 hover:bg-emerald-600 h-12 sm:h-14 text-base sm:text-lg"
           >
             {isProcessing ? (
               <>
-                <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 mr-2 animate-spin" />
                 Memproses...
               </>
             ) : (
               <>
-                <ShieldCheck className="w-5 h-5 mr-2" />
-                Bayar Sekarang - {formatCurrency(totalAmount)}
+                <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                <span className="hidden sm:inline">Bayar Sekarang - </span>
+                {formatCurrency(totalAmount)}
               </>
             )}
           </Button>
