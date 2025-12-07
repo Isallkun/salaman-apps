@@ -40,6 +40,8 @@ export interface Product {
   isActive: boolean
   createdAt: Date
   updatedAt: Date
+  supplierName?: string
+  supplierPhone?: string
 }
 
 export interface ProductInput {
