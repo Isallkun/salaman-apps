@@ -24,7 +24,7 @@ export const registerSchema = z.object({
     .string()
     .min(1, 'Konfirmasi password wajib diisi'),
   role: z.enum(['buyer', 'supplier'], {
-    required_error: 'Pilih jenis akun',
+    message: 'Pilih jenis akun',
   }),
   businessName: z
     .string()
