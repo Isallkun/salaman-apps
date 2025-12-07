@@ -191,8 +191,8 @@ export async function demoLogin(): Promise<AuthResult> {
           email: 'buyer@demo.com',
           role: 'buyer' as UserRole,
           businessName: 'Demo Buyer',
-          phone: null,
-          address: null,
+          phone: undefined,
+          address: undefined,
           createdAt: new Date(),
           updatedAt: new Date(),
         }
@@ -221,8 +221,8 @@ export async function demoLogin(): Promise<AuthResult> {
         email: 'buyer@demo.com',
         role: 'buyer' as UserRole,
         businessName: 'Demo Buyer',
-        phone: null,
-        address: null,
+        phone: undefined,
+        address: undefined,
         createdAt: new Date(),
         updatedAt: new Date(),
       }
