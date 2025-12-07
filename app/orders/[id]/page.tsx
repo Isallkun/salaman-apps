@@ -15,7 +15,7 @@ import {
 } from 'lucide-react'
 
 import { Order } from '@/types'
-import { getOrderById } from '@/actions/order'
+import { getOrderById, simulatePaymentSuccess, simulateShipping } from '@/actions/order'
 import { formatCurrency, formatDateTime } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -36,6 +36,7 @@ export default function OrderDetailPage() {
   const searchParams = useSearchParams()
   const [order, setOrder] = useState<Order | null>(null)
   const [isLoading, setIsLoading] = useState(true)
+  const [isSimulating, setIsSimulating] = useState(false)
 
   const paymentStatus = searchParams.get('status')
 
@@ -207,6 +208,55 @@ export default function OrderDetailPage() {
                   </p>
                 </div>
               </div>
+            </CardContent>
+          </Card>
+
+          {/* Demo Simulation Buttons */}
+          <Card className="bg-orange-50 border-orange-200">
+            <CardHeader>
+              <CardTitle className="text-orange-800 text-sm">🎯 Demo Simulasi (Untuk Presentasi)</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {order.status === 'PENDING' && (
+                <Button
+                  onClick={async () => {
+                    setIsSimulating(true)
+                    await simulatePaymentSuccess(order.id)
+                    await loadOrder()
+                    setIsSimulating(false)
+                  }}
+                  disabled={isSimulating}
+                  className="w-full bg-blue-500 hover:bg-blue-600"
+                >
+                  {isSimulating ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <CheckCircle className="w-4 h-4 mr-2" />}
+                  Simulasi: Pembayaran Berhasil
+                </Button>
+              )}
+              {order.status === 'PAID' && (
+                <Button
+                  onClick={async () => {
+                    setIsSimulating(true)
+                    await simulateShipping(order.id)
+                    await loadOrder()
+                    setIsSimulating(false)
+                  }}
+                  disabled={isSimulating}
+                  className="w-full bg-purple-500 hover:bg-purple-600"
+                >
+                  {isSimulating ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Truck className="w-4 h-4 mr-2" />}
+                  Simulasi: Supplier Kirim Barang
+                </Button>
+              )}
+              {(order.status === 'SHIPPED' || order.status === 'DELIVERED') && (
+                <p className="text-sm text-orange-700">
+                  ✅ Sekarang upload foto bukti penerimaan di atas untuk verifikasi AI
+                </p>
+              )}
+              {order.status === 'COMPLETED' && (
+                <p className="text-sm text-green-700">
+                  🎉 Demo selesai! Transaksi berhasil diverifikasi.
+                </p>
+              )}
             </CardContent>
           </Card>
 
