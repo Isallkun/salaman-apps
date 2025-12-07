@@ -81,17 +81,26 @@ export async function POST(request: NextRequest) {
       console.error('Update transaction error:', txError)
     }
 
-    // Update order status
-    const { error: orderError } = await supabase
-      .from('orders')
-      .update({
-        status: orderStatus,
-        updated_at: new Date().toISOString(),
-      })
-      .eq('id', orderId)
+    // Get the actual order ID from transaction record
+    const { data: txData } = await supabase
+      .from('transactions')
+      .select('order_id')
+      .eq('midtrans_order_id', orderId)
+      .single()
 
-    if (orderError) {
-      console.error('Update order error:', orderError)
+    if (txData?.order_id) {
+      // Update order status using the actual order UUID
+      const { error: orderError } = await supabase
+        .from('orders')
+        .update({
+          status: orderStatus,
+          updated_at: new Date().toISOString(),
+        })
+        .eq('id', txData.order_id)
+
+      if (orderError) {
+        console.error('Update order error:', orderError)
+      }
     }
 
     console.log(`Order ${orderId} updated: transaction=${newStatus}, order=${orderStatus}`)
